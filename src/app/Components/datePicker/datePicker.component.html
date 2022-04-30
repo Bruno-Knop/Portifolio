@@ -1,0 +1,107 @@
+<ion-item id="open-modal-{{usingModel}}">
+    <ion-icon icon="calendar-outline" slot="start" color="primary"></ion-icon>
+    <!-- <ion-label>{{usingModel}}</ion-label> -->
+    <ion-text slot="end"> {{ dataPickerInterface.formattedDateString }}</ion-text>
+</ion-item>
+
+<!--
+  ===================================
+  ************ DATE-TIME ************
+  ===================================
+-->
+
+<div *ngIf="presentation === 'date-time' || presentation === 'time-date'">
+    <ion-popover *ngIf="modelDatePicker === 'popover'" class="modal-datePicker" trigger="open-modal-{{usingModel}}">
+        <ng-template>
+            <ion-content>
+                <ion-datetime #datetime [value]="dateValue" size="cover" (ionChange)="dateTimeChange(datetime.value)" locale="pt-BR" [presentation]="presentation">
+                    <ion-buttons slot="buttons">
+                        <ion-button (click)="datetime.cancel(true)" color="dark">Cancelar</ion-button>
+                        <ion-button (click)="datetime.confirm(true)" color="primary">Salvar</ion-button>
+                    </ion-buttons>
+                </ion-datetime>
+            </ion-content>
+        </ng-template>
+    </ion-popover>
+
+    <ion-modal *ngIf="modelDatePicker === 'modal'" class="modal-datePicker" trigger="open-modal-{{usingModel}}">
+        <ng-template>
+            <ion-content>
+                <ion-datetime #datetime [value]="dateValue" size="cover" (ionChange)="dateTimeChange(datetime.value)" locale="pt-BR" [presentation]="presentation">
+                    <ion-buttons slot="buttons">
+                        <ion-button (click)="datetime.cancel(true)" color="dark">Cancelar</ion-button>
+                        <ion-button (click)="datetime.confirm(true)" color="primary">Salvar</ion-button>
+                    </ion-buttons>
+                </ion-datetime>
+            </ion-content>
+        </ng-template>
+    </ion-modal>
+</div>
+
+<!--
+  ===================================
+  ************ DATE ************
+  ===================================
+-->
+
+<div *ngIf="presentation === 'date'">
+    <ion-popover *ngIf="modelDatePicker === 'popover'" trigger="open-modal-{{usingModel}}">
+        <ng-template>
+            <ion-content>
+                <ion-datetime #datetime [value]="dateValue" size="cover" (ionChange)="dateChange(datetime.value)" locale="pt-BR" [presentation]="presentation">
+                    <ion-buttons slot="buttons">
+                        <ion-button (click)="datetime.cancel(true)" color="dark">Cancelar</ion-button>
+                        <ion-button (click)="datetime.confirm(true)" color="primary">Salvar</ion-button>
+                    </ion-buttons>
+                </ion-datetime>
+            </ion-content>
+        </ng-template>
+    </ion-popover>
+
+    <ion-modal *ngIf="modelDatePicker === 'modal'" class="modal-datePicker" trigger="open-modal-{{usingModel}}">
+        <ng-template>
+            <ion-content>
+                <ion-datetime #datetime [value]="dateValue" size="cover" (ionChange)="dateChange(datetime.value)" locale="pt-BR" [presentation]="presentation">
+                    <ion-buttons slot="buttons">
+                        <ion-button (click)="datetime.cancel(true)" color="dark">Cancelar</ion-button>
+                        <ion-button (click)="datetime.confirm(true)" color="primary">Salvar</ion-button>
+                    </ion-buttons>
+                </ion-datetime>
+            </ion-content>
+        </ng-template>
+    </ion-modal>
+</div>
+
+<!--
+  ===================================
+  ************ TIME ************
+  ===================================
+-->
+
+<div *ngIf="presentation === 'time'">
+    <ion-popover *ngIf="modelDatePicker === 'popover'" trigger="open-modal-{{usingModel}}">
+        <ng-template>
+            <ion-content>
+                <ion-datetime #datetime [value]="dateValue" size="cover" (ionChange)="timeChange(datetime.value)" locale="pt-BR" [presentation]="presentation">
+                    <ion-buttons slot="buttons">
+                        <ion-button (click)="datetime.cancel(true)" color="dark">Cancelar</ion-button>
+                        <ion-button (click)="datetime.confirm(true)" color="primary">Salvar</ion-button>
+                    </ion-buttons>
+                </ion-datetime>
+            </ion-content>
+        </ng-template>
+    </ion-popover>
+
+    <ion-modal *ngIf="modelDatePicker === 'modal'" class="modal-datePicker" trigger="open-modal-{{usingModel}}">
+        <ng-template>
+            <ion-content>
+                <ion-datetime #datetime [value]="dateValue" size="cover" (ionChange)="timeChange(datetime.value)" locale="pt-BR" [presentation]="presentation">
+                    <ion-buttons slot="buttons">
+                        <ion-button (click)="datetime.cancel(true)" color="dark">Cancelar</ion-button>
+                        <ion-button (click)="datetime.confirm(true)" color="primary">Salvar</ion-button>
+                    </ion-buttons>
+                </ion-datetime>
+            </ion-content>
+        </ng-template>
+    </ion-modal>
+</div>

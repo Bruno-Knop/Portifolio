@@ -1,0 +1,90 @@
+<!-- <ngx-datatable #atividadesTable id="dataTable" class="material fullscreen expandable server-scrolling-demo" [count]="total" [columnMode]="columnMode.force" [loadingIndicator]="isLoading" [headerHeight]="headerHeight" [footerHeight]="footerHeight" [rowHeight]="rowHeight"
+        [scrollbarV]="true" [scrollbarH]="true" [rows]="rows" (scroll)="onScroll($event.offsetY)">
+        <ngx-datatable-row-detail [rowHeight]="50" #myDetailRow (toggle)="onDetailToggle($event)">
+            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                <ion-row style="padding-left:35px;">
+                    <ion-col size="12">
+                        <ion-buttons>
+                            <ion-button>
+                                <ion-icon name="create-outline"></ion-icon>
+                            </ion-button>
+                            <ion-button>
+                                <ion-icon name="add-outline"></ion-icon>
+                            </ion-button>
+                        </ion-buttons>
+                    </ion-col>
+                </ion-row>
+            </ng-template>
+        </ngx-datatable-row-detail>
+        <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                <a class="btnColapseTable" href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded" title="Expandir" (click)="toggleExpandRow(row)">
+                </a>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="ID" prop="codigo" [width]="50" [resizeable]="false"></ngx-datatable-column>
+        <ngx-datatable-column name="Tipo" prop="tipo" [width]="100" [resizeable]="false"></ngx-datatable-column>
+        <ngx-datatable-column name="Empresa" prop="empresa" [width]="100" [resizeable]="false"></ngx-datatable-column>
+        <ngx-datatable-column name="Prioridade" prop="prioridade" [width]="100" [resizeable]="false"></ngx-datatable-column>
+        <ngx-datatable-column name="Status" prop="status" [width]="100" [resizeable]="false"></ngx-datatable-column>
+        <ngx-datatable-column name="Titulo" prop="titulo"></ngx-datatable-column>
+        <ngx-datatable-column name="Responsavel" prop="responsavel" [width]="100" [resizeable]="false"></ngx-datatable-column>
+        <ngx-datatable-column name="Atividade" prop="atividade" [width]="100" [resizeable]="false"></ngx-datatable-column>
+        <ngx-datatable-column name="Planejamento" prop="planejamento" [width]="100" [resizeable]="false"></ngx-datatable-column>
+        <ngx-datatable-column name="Criador" prop="criador" [width]="80" [resizeable]="false"></ngx-datatable-column>
+        <ngx-datatable-column name="Data Criacao" prop="dataCriacao" [width]="100" [resizeable]="false"></ngx-datatable-column>
+    </ngx-datatable> -->
+
+<!-- <ngx-datatable #atividadesTable class="material ngxDatatable" [style]="style" [rows]="rows" [limit]="pageSize" [externalPaging]="true" [count]="total" [columnMode]="columnMode.force" [headerHeight]="headerHeight" [footerHeight]="footerHeight"
+        [rowHeight]="rowHeight" [loadingIndicator]="isLoading" [scrollbarV]="true" (scroll)="onScroll($event.offsetY)">
+        <ngx-datatable-row-detail [rowHeight]="50" #myDetailRow (toggle)="onDetailToggle($event)">
+            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                <ion-row style="padding-left:35px;">
+                    <ion-col size="12">
+                        <ion-buttons>
+                            <ion-button>
+                                <ion-icon name="create-outline"></ion-icon>
+                            </ion-button>
+                            <ion-button>
+                                <ion-icon name="add-outline"></ion-icon>
+                            </ion-button>
+                        </ion-buttons>
+                    </ion-col>
+                </ion-row>
+            </ng-template>
+        </ngx-datatable-row-detail>
+        <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                <a class="btnColapseTable" href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded" title="Expandir" (click)="toggleExpandRow(row)">
+                </a>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column *ngFor="let column of columns" [name]="column.name" [prop]="column.prop" [width]="column.width" [resizeable]="column.resizeable"></ngx-datatable-column>
+    </ngx-datatable> -->
+
+<ngx-datatable #Table class="material ngxDatatable" [rows]="page.rows" [columnMode]="columnMode.force" [loadingIndicator]="isLoading" [headerHeight]="headerHeight" [footerHeight]="footerHeight" [rowHeight]="rowHeight" [externalPaging]="true" [count]="page.count"
+    [offset]="page.offset" [limit]="page.limit" [scrollbarH]="true" (page)="setPage($event)">
+    <ngx-datatable-row-detail [rowHeight]="50" #myDetailRow (toggle)="onDetailToggle($event)">
+        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+            <ion-row style="padding-left:35px;">
+                <ion-col size="12">
+                    <ion-buttons>
+                        <ion-button>
+                            <ion-icon name="create-outline"></ion-icon>
+                        </ion-button>
+                        <ion-button>
+                            <ion-icon name="add-outline"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                </ion-col>
+            </ion-row>
+        </ng-template>
+    </ngx-datatable-row-detail>
+    <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+            <a class="btnColapseTable" href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded" title="Expandir" (click)="toggleExpandRow(row)">
+            </a>
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column *ngFor="let column of page.header" [name]="column.name" [prop]="column.prop" [width]="column.width" [resizeable]="column.resizeable"></ngx-datatable-column>
+</ngx-datatable>
