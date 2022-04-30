@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { IonDatetime } from '@ionic/angular';
 import { format, parseISO } from 'date-fns';
+import { DatePickerInterface } from 'src/app/Interfaces/datePicker.interface';
+import { DatePickerService } from 'src/app/Services/datePicker.service';
 
-import { DatePickerService } from '../../service/datePicker.service';
-import { DatePickerInterface } from './../../models/datePicker.model';
 
 /* eslint-disable @typescript-eslint/member-ordering */
 @Component({

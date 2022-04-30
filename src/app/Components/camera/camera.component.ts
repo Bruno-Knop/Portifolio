@@ -1,10 +1,10 @@
+import { LocalFileInterface } from './../../Interfaces/camera.interface';
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, Input, OnInit } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ActionSheetController } from '@ionic/angular';
-import { LocalFile } from 'src/app/models/camera.model';
-import { CameraService } from 'src/app/service/camera.service';
-import { ControllService } from 'src/app/service/controller.service';
+import { CameraService } from 'src/app/Services/camera.service';
+import { ControllService } from 'src/app/Services/controller.service';
 
 @Component({
   selector: 'app-camera',
@@ -15,7 +15,7 @@ export class CameraComponent implements OnInit {
   @Input() uploadButton: boolean;
   @Input() deleteButton: boolean;
 
-  images: LocalFile[] = [];
+  images: LocalFileInterface[] = [];
 
   constructor(
     private cameraService: CameraService,
@@ -80,7 +80,7 @@ export class CameraComponent implements OnInit {
     };
   }
 
-  async upload(file: LocalFile) {
+  async upload(file: LocalFileInterface) {
     const dataUpload = await this.cameraService.fileUpload(file).then((retorno) => retorno);
     if(dataUpload.success){
       this.deleteImg(file);
@@ -90,7 +90,7 @@ export class CameraComponent implements OnInit {
   };
 
 
-  async deleteImg(file: LocalFile) {
+  async deleteImg(file: LocalFileInterface) {
     await this.cameraService.deleteImage(file);
     this.controller.toastControllerBottom('Imagem deletada com sucesso!');
   };

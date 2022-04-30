@@ -1,0 +1,117 @@
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+.header-bg {
+    position: unset;
+}
+
+.menu-header-bg {
+    height: 200px;
+    width: 350px;
+    background: var(--ion-color-primary);
+    background: linear-gradient(40deg, rgba(233, 115, 0, 1) 0%, rgba(246, 151, 69, 0.7404003837863271) 100%);
+    box-shadow: 0px 1px 10px rgba(98, 140, 255, 0.5);
+    transform: rotate(-15deg);
+    border-radius: 10px 10px 10px 50px;
+    margin-left: -18px;
+    margin-top: -50px;
+    margin-bottom: 60px;
+}
+
+.header-content {
+    position: absolute;
+    top: 30px;
+    left: 15px;
+    display: flex;
+    align-items: center;
+    .header-img {
+        border-radius: 50%;
+        border: 7px solid #d8721b;
+        margin-right: 15px;
+        display: grid;
+        width: 110px;
+        height: 110px;
+        top: 30px;
+        left: 15px;
+        align-items: center;
+        text-align: center;
+        img {
+            width: 100px;
+            height: 100px;
+        }
+        #toggleTheme-icon {
+            width: 20px;
+            height: 20px;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            margin-left: 38px;
+            margin-top: 60px;
+        }
+    }
+    h2 {
+        font-weight: 300;
+        color: #fff;
+    }
+    p {
+        font-size: 12px;
+        color: #fff;
+        font-weight: 100;
+        letter-spacing: 0.4px;
+    }
+}
+
+.menu-items {
+    margin: 0px;
+    ion-icon {
+        margin-right: 20px;
+        color: #d8721b;
+    }
+    ion-item {
+        padding-left: 15px;
+        margin-bottom: 10px;
+    }
+    ion-accordion {
+        .subMenu-items {
+            padding-left: 35px;
+        }
+    }
+    .active {
+        border-left: 5px solid;
+        color: #d8721b;
+        ion-ico {
+            color: #f5821f;
+        }
+    }
+}
+
+.footer-bg {
+    position: unset;
+    height: 50px;
+    width: 350px;
+    background: var(--ion-color-primary);
+    background: linear-gradient(40deg, #e97300 0%, rgba(246, 151, 69, 0.7404003838) 100%);
+    box-shadow: 0px 1px 10px rgb(98 140 255 / 50%);
+    border-radius: 80px 80px 10px 10px;
+    margin-left: -24px;
+    p {
+        font-size: 10px;
+        height: 5vh;
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.logout {
+    top: 15px;
+    right: 15px;
+    align-items: center;
+    display: flex;
+    position: absolute;
+    font-size: 30px;
+    color: #fff;
+}
