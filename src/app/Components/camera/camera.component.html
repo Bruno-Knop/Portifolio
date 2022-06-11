@@ -17,7 +17,7 @@
                     <ion-label>
                         {{ img.name }}
                     </ion-label>
-                    <ion-button *ngIf="uploadButton" class="upload-photo" slot="end" fill="clear" (click)="upload(img)">
+                    <ion-button *ngIf="uploadButton" class="upload-photo" slot="end" fill="clear" (click)="uploadImage(img)">
                         <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
                     </ion-button>
                     <ion-button *ngIf="deleteButton" class="delete-photo" slot="end" fill="clear" (click)="deleteImg(img)">

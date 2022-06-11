@@ -1,3 +1,4 @@
+import { MenuInterface } from './menu.interface';
 export interface ResultLoginInterface {
   message: string;
   success: boolean;
@@ -9,6 +10,7 @@ export interface LoginInterface {
   codigo: number;
   nome: string;
   perfil: string;
-  time: string;
   token: string;
+  imgPerfil: string;
+  menu: MenuInterface[];
 }

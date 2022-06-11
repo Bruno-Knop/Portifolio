@@ -1,6 +1,6 @@
-<ion-item id="open-modal-{{usingModel}}">
+<ion-item id="open-modal-{{formControlNameModel}}">
     <ion-icon icon="calendar-outline" slot="start" color="primary"></ion-icon>
-    <!-- <ion-label>{{usingModel}}</ion-label> -->
+    <!-- <ion-label>{{formControlNameModel}}</ion-label> -->
     <ion-text slot="end"> {{ dataPickerInterface.formattedDateString }}</ion-text>
 </ion-item>
 
@@ -11,7 +11,7 @@
 -->
 
 <div *ngIf="presentation === 'date-time' || presentation === 'time-date'">
-    <ion-popover *ngIf="modelDatePicker === 'popover'" class="modal-datePicker" trigger="open-modal-{{usingModel}}">
+    <ion-popover *ngIf="modelDatePicker === 'popover'" class="modal-datePicker" trigger="open-modal-{{formControlNameModel}}">
         <ng-template>
             <ion-content>
                 <ion-datetime #datetime [value]="dateValue" size="cover" (ionChange)="dateTimeChange(datetime.value)" locale="pt-BR" [presentation]="presentation">
@@ -24,7 +24,7 @@
         </ng-template>
     </ion-popover>
 
-    <ion-modal *ngIf="modelDatePicker === 'modal'" class="modal-datePicker" trigger="open-modal-{{usingModel}}">
+    <ion-modal *ngIf="modelDatePicker === 'modal'" class="modal-datePicker" trigger="open-modal-{{formControlNameModel}}">
         <ng-template>
             <ion-content>
                 <ion-datetime #datetime [value]="dateValue" size="cover" (ionChange)="dateTimeChange(datetime.value)" locale="pt-BR" [presentation]="presentation">
@@ -45,7 +45,7 @@
 -->
 
 <div *ngIf="presentation === 'date'">
-    <ion-popover *ngIf="modelDatePicker === 'popover'" trigger="open-modal-{{usingModel}}">
+    <ion-popover *ngIf="modelDatePicker === 'popover'" trigger="open-modal-{{formControlNameModel}}">
         <ng-template>
             <ion-content>
                 <ion-datetime #datetime [value]="dateValue" size="cover" (ionChange)="dateChange(datetime.value)" locale="pt-BR" [presentation]="presentation">
@@ -58,7 +58,7 @@
         </ng-template>
     </ion-popover>
 
-    <ion-modal *ngIf="modelDatePicker === 'modal'" class="modal-datePicker" trigger="open-modal-{{usingModel}}">
+    <ion-modal *ngIf="modelDatePicker === 'modal'" class="modal-datePicker" trigger="open-modal-{{formControlNameModel}}">
         <ng-template>
             <ion-content>
                 <ion-datetime #datetime [value]="dateValue" size="cover" (ionChange)="dateChange(datetime.value)" locale="pt-BR" [presentation]="presentation">
@@ -79,7 +79,7 @@
 -->
 
 <div *ngIf="presentation === 'time'">
-    <ion-popover *ngIf="modelDatePicker === 'popover'" trigger="open-modal-{{usingModel}}">
+    <ion-popover *ngIf="modelDatePicker === 'popover'" trigger="open-modal-{{formControlNameModel}}">
         <ng-template>
             <ion-content>
                 <ion-datetime #datetime [value]="dateValue" size="cover" (ionChange)="timeChange(datetime.value)" locale="pt-BR" [presentation]="presentation">
@@ -92,7 +92,7 @@
         </ng-template>
     </ion-popover>
 
-    <ion-modal *ngIf="modelDatePicker === 'modal'" class="modal-datePicker" trigger="open-modal-{{usingModel}}">
+    <ion-modal *ngIf="modelDatePicker === 'modal'" class="modal-datePicker" trigger="open-modal-{{formControlNameModel}}">
         <ng-template>
             <ion-content>
                 <ion-datetime #datetime [value]="dateValue" size="cover" (ionChange)="timeChange(datetime.value)" locale="pt-BR" [presentation]="presentation">

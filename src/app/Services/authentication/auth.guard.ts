@@ -1,8 +1,9 @@
+import { ControllService } from 'src/app/Services/controller.service';
 
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Injectable } from '@angular/core';
 import { CanActivate, CanLoad, Route, Router } from '@angular/router';
-import { StorageService } from './../storageService.service';
+import { StorageService } from '../storage.service';
 import { AuthService } from '../authentication/auth-service.service';
 
 
@@ -12,7 +13,7 @@ import { AuthService } from '../authentication/auth-service.service';
 export class AuthGuard implements CanActivate, CanLoad{
 
   constructor(
-    private router: Router,
+    private controller: ControllService,
     private service: StorageService,
     private auth: AuthService
     ) {}
@@ -21,7 +22,7 @@ export class AuthGuard implements CanActivate, CanLoad{
     if (await this.service.getToken().then(res => res) && await this.auth.validateToken().then(retorno => retorno)) {
       return true;
     } else {
-      this.router.navigate(['Login']);
+      this.controller.navigateLogin();
       return false;
     };
   }

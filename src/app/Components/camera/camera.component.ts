@@ -1,5 +1,4 @@
 import { LocalFileInterface } from './../../Interfaces/camera.interface';
-/* eslint-disable @typescript-eslint/member-ordering */
 import { Component, Input, OnInit } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ActionSheetController } from '@ionic/angular';
@@ -63,6 +62,21 @@ export class CameraComponent implements OnInit {
     await actionSheet.present();
   };
 
+  async uploadImage(file: LocalFileInterface) {
+    const dataUpload = await this.cameraService.fileUpload(file).then((retorno) => retorno);
+    if(dataUpload.success){
+      this.deleteImg(file);
+    } else {
+      this.controller.toastControllerBottom(dataUpload.message);
+    };
+  };
+
+
+  async deleteImg(file: LocalFileInterface) {
+    await this.cameraService.deleteImage(file);
+    this.controller.toastControllerBottom('Imagem deletada com sucesso!');
+  };
+
   private async takePicture(source: CameraSource){
     const image = await Camera.getPhoto({
       quality: 90,
@@ -78,20 +92,5 @@ export class CameraComponent implements OnInit {
 
       await this.cameraService.saveImage(image, loading);
     };
-  }
-
-  async upload(file: LocalFileInterface) {
-    const dataUpload = await this.cameraService.fileUpload(file).then((retorno) => retorno);
-    if(dataUpload.success){
-      this.deleteImg(file);
-    } else {
-      this.controller.toastControllerBottom(dataUpload.message);
-    };
-  };
-
-
-  async deleteImg(file: LocalFileInterface) {
-    await this.cameraService.deleteImage(file);
-    this.controller.toastControllerBottom('Imagem deletada com sucesso!');
   };
 }

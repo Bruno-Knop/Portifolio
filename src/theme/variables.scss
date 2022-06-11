@@ -7,6 +7,8 @@
     --ion-color-primary-contrast-rgb: 255, 255, 255;
     --ion-color-primary-shade: #d8721b;
     --ion-color-primary-tint: #f68f35;
+    --ion-color-primary-linear-gradient: #e97300;
+    --ion-color-primary-linear-gradient-rgba: rgba(246, 151, 69, 0.7404003838);
     /** secondary **/
     --ion-color-secondary: #c4c4c446;
     --ion-color-secondary-rgb: 61, 194, 255;
@@ -210,6 +212,29 @@ body[color-theme="dark"] {
 hr {
     background: #f5821f;
     border: solid 1px #f5821f;
+}
+
+// Scrollbar styles
+//Firefox
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #f5831fc6;
+}
+
+//Chrome, Edge, and Safari
+*::-webkit-scrollbar {
+    width: 6px;
+    height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #adb5bd5d;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #f5831f88;
+    border-radius: 20px;
+    border: 3px black;
 }
 
 //MARGIN
@@ -564,4 +589,9 @@ ngx-datatable {
     .btnColapseTable {
         text-decoration: none;
     }
+}
+
+ion-item {
+    --background-hover: var(--ion-color-primary);
+    --color-hover: var(--ion-color-primary);
 }

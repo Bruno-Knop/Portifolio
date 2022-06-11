@@ -1,3 +1,4 @@
+import { LoginInterface } from './../Interfaces/login.interface';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
@@ -33,11 +34,11 @@ export class StorageService {
     return await this.storage.get(DARKMODE);
   };
 
-  async setUser(value: string) {
+  async setUser(value: LoginInterface) {
     await this.storage.set(LOGIN, value);
   };
 
-  async getUser() {
+  async getUser(): Promise<LoginInterface> {
     return await this.storage.get(LOGIN);
   };
 
@@ -45,11 +46,11 @@ export class StorageService {
     this.storage.remove(LOGIN);
   };
 
-  async setToken(value: string) {
-    await this.storage.set(TOKEN, value);
+  async setToken(token: string) {
+    await this.storage.set(TOKEN, token);
   };
 
-  async getToken() {
+  async getToken(): Promise<string> {
     return await this.storage.get(TOKEN);
   };
 
@@ -57,11 +58,11 @@ export class StorageService {
     this.storage.remove(TOKEN);
   };
 
-  async setExpireToken(value: string) {
-    await this.storage.set(EXPIRE, value);
+  async setExpireToken(data: string) {
+    await this.storage.set(EXPIRE, data);
   };
 
-  async getExpireToken() {
+  async getExpireToken(): Promise<string> {
     return await this.storage.get(EXPIRE);
   };
 
@@ -70,9 +71,9 @@ export class StorageService {
   };
 
   logout() {
-    this.removeToken();
+    this.clear();
     this.controller.toastControllerBottom('Logout efetuado com sucesso!');
-    this.controller.navigateIntro();
+    this.controller.navigateLogin();
   };
 
 };

@@ -28,6 +28,15 @@ export class DatePickerService {
     this.formattedDateHoursPT = format(new Date(), 'dd/MM/yyyy HH:mm:ss');
   };
 
+  formatDateEN(data: string){
+    console.log(data);
+    if(data === ''){
+      return '';
+    }else{
+      return `${data.split('/')[2]}-${data.split('/')[1]}-${data.split('/')[0]}`;
+    }
+  }
+
   public weekNumber(value: string){
     const currentDate: any = new Date(
       Date.UTC(

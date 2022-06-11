@@ -1,0 +1,11 @@
+.popNotifications {
+    --min-width: 300px !important;
+}
+
+.btn-item {
+    cursor: pointer;
+}
+
+.btn-item:hover {
+    background-color: var(--ion-color-primary);
+}

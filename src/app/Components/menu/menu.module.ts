@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { MenuComponent } from './menu.component';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { ScrollbarThemeModule } from 'src/app/Directive/ScrollbarTheme.directive';
+
+import { MenuComponent } from './menu.component';
 
 
 @NgModule({
@@ -11,9 +12,8 @@ import { IonicModule } from '@ionic/angular';
   imports: [
     IonicModule,
     CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    RouterModule
+    RouterModule,
+    ScrollbarThemeModule
   ],
   exports: [MenuComponent]
 })

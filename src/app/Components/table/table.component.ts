@@ -5,6 +5,7 @@ import { ResultInterface } from 'src/app/Interfaces/result.interface';
 import { TableService } from './../../Services/table.service';
 import { TableInfoInterface } from './../../Interfaces/tabela.interface';
 import { HttpService } from './../../Services/http.service';
+import { FiltroInterface } from 'src/app/Interfaces/filtro.interface';
 
 @Component({
   selector: 'app-table',
@@ -15,13 +16,15 @@ export class TableComponent implements OnInit {
   @ViewChild('Table') table: any;
   @Input() namePage: string;
   page: TableInfoInterface = {
-    offset: 0,
-    limit: 10,
-    count: 0,
-    totalPages: 0,
-    header: [],
-    rows: []
+      typeTable: 'api',
+      offset: 0,
+      limit: 10,
+      count: 0,
+      totalPages: 0,
+      header: [],
+      rows: []
   };
+
   columns: TableColumn[];
 
   readonly headerHeight = 50;
@@ -40,7 +43,7 @@ export class TableComponent implements OnInit {
       this.isLoading = value;
     });
 
-    this.tableService.emitPageData.subscribe((value: TableInfoInterface) => {
+    this.tableService.emitPageBody.subscribe((value: TableInfoInterface) => {
       console.log('emitPageData', value);
       this.page = value;
     });

@@ -15,13 +15,13 @@ export class DatePickerComponent implements OnInit {
   @ViewChild(IonDatetime) datetime: IonDatetime;
   @Output() dataValueChange = new EventEmitter();
   //Options
-  @Input() usingModel: string;
+  @Input() formControlNameModel: string;
   @Input() editDateValue: string;
   @Input() modelDatePicker = 'modal';
   @Input() presentation = 'date';
 
   dataPickerInterface: DatePickerInterface = {
-    usingModel: '',
+    formControlNameModel: '',
     formattedDateString: ''
   };
 
@@ -31,7 +31,7 @@ export class DatePickerComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.dataPickerInterface.usingModel = await this.usingModel;
+    this.dataPickerInterface.formControlNameModel = await this.formControlNameModel;
 
     const model = await this.presentation;
     switch (model) {

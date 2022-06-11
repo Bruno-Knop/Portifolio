@@ -1,18 +1,11 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { format } from 'date-fns';
+import { format, formatISO, parseISO } from 'date-fns';
 import { BehaviorSubject } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { LoginInterface, ResultLoginInterface } from 'src/app/Interfaces/login.interface';
 
-import { ControllService } from '../controller.service';
-import { EncryptService } from '../encrypt.service';
 import { HttpService } from '../http.service';
-import { StorageService } from '../storageService.service';
-
-/* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable no-unused-labels */
-/* eslint-disable @typescript-eslint/naming-convention */
-const API = environment.api;
+import { StorageService } from '../storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,126 +13,84 @@ const API = environment.api;
 export class AuthService {
   public loadingBar: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public authState = new BehaviorSubject(false);
+  emitUser = new EventEmitter<LoginInterface>();
 
-  constructor(private controller: ControllService,
-              private encrypt: EncryptService,
-              private http: HttpService,
-              private service: StorageService,
-              private platform: Platform
-              ) {
+  constructor(
+    private http: HttpService,
+    private service: StorageService,
+    private platform: Platform
+  ) {
     this.platform.ready().then(() => {
       this.ifLoggedIn();
     });
-
   };
 
-  async Login(value: any) {
-    const dateTime = new Date();
-    const result = await this.http.post('usuarios/Login', value).then(result => result).catch(()=> ({success: null}));
-    const cryptSenha = await this.encrypt.encrypt(value.senha);
-
-    if(result.success) {
-      await this.service.setToken(result.data.accessToken);
-
-      await this.http.get(`usuarios/Name/${value.usuario}`).then((retorno) => {
-        retorno.data.senha = cryptSenha;
-        this.service.setUser(retorno.data);
-        this.service.setExpireToken(format(dateTime.setDate(dateTime.getDate()+1), 'MM/dd/yyyy'));
+  async login(value: any): Promise<ResultLoginInterface> {
+    return await this.http.post('login', value).then(async (result: ResultLoginInterface) => {
+      if(result.success) {
+        await this.service.setToken(result.data.token);
+        await this.service.setUser(result.data);
+        await this.service.setExpireToken(formatISO(new Date()));
+        this.emitUser.emit(result.data);
         this.authState.next(true);
-      }).catch((err) => err);
-
-      return result.success;
-    } else {
-      return result.success;
-    };
-  };
-
-  async loginOffline(value: any) {
-    if(await this.service.getUser().then((res) => res) !== null){
-      const storageRetorno =  await this.service.getUser().then((res) => res);
-      const senha =  await this.encrypt.decrypt(storageRetorno.senha);
-
-      if(storageRetorno.usuario === value.usuario && senha === value.senha){
-        delete value.senha;
-        this.service.setToken(await this.encrypt.encryptJSON(storageRetorno).then((res) => res));
-        return true;
-      } else {
-        return false;
       };
-    } else {
-      return null;
-    };
+
+      return result;
+    });
   };
 
   async validateToken() {
-      const dataFormatada = new Date();
-      const expiracaoToken = new Date(String(await this.service.getExpireToken().then(retorno => retorno)));
+    // const validationInDays = 0;
+    // const validationInHours = 8;
+    // const newDate = new Date();
+    // const expireDate = new Date(parseISO(await this.service.getExpireToken().then(retorno => retorno)));
 
-      expiracaoToken.setDate(expiracaoToken.getDate());
-      const differenceInDays = Math.floor((dataFormatada.getTime() - expiracaoToken.getTime()) / (1000 * 3600 * 24));
+    // //data e Hora do ultimo login
+    // //const expireDay = Number(format(expireDate, 'dd'));
+    // //const expireMonth = Number(format(expireDate, 'MM'));
+    // //const expireYear = Number(format(expireDate, 'yyyy'));
+    // const expireHours = Number(format(expireDate, 'hh'));
+    // //const expireMinutes = Number(format(expireDate, 'mm'));
+    // //const expireSeconds = Number(format(expireDate, 'ss'));
 
-      if(differenceInDays === 0){
-        return await this.refreshToken().then(retorno => retorno);
-      } else {
-        if(differenceInDays > -1){
-          localStorage.clear();
-          return false;
-        } else {
-          return true;
-        };
-      };
-  };
+    // //data e Hora atual
+    // // const currentDay = Number(format(newDate, 'dd'));
+    // // const currentMonth = Number(format(newDate, 'MM'));
+    // // const currentYear = Number(format(newDate, 'yyyy'));
+    // const currentHours = Number(format(newDate, 'hh'));
+    // // const currentMinutes = Number(format(newDate, 'mm'));
+    // // const currentSeconds = Number(format(newDate, 'ss'));
 
-  async refreshToken() {
-    const dateTime = new Date();
-    return await this.http.post('usuarios/refresh-token', {})
-    .then(retorno =>{
-      if(retorno.success){
-        this.service.setToken(retorno.data.accessToken);
-        this.service.setExpireToken(format(dateTime.setDate(dateTime.getDate()+1), 'MM/dd/yyyy'));
-      };
-      return true;
-    }).catch(() => {this.service.clear(); return false;});
-  };
+    // if(validationInDays !== 0){
+    //   const differenceInDays = Math.floor(
+    //     (new Date(expireDate.setDate(expireDate.getDate()+validationInDays)).getTime() - newDate.getTime()) / (1000 * 3600 * 24)
+    //   );
 
-  async resetPassword(value: any){
-    let ret: any;
-    await this.http.post(`${API}/usuarios/recuperar-senha`, value).then((retorno: any) => {
-      if(retorno.success){
-        ret = retorno.message;
-      };
-    });
-    return ret;
-  };
-
-  async register(value: any, loader: any) {
-    // if (this.network.type !== 'none') {
-    //   const dateTime = new Date();
-    //   const registerArray = {
-    //     codigo_empresa: 1,
-    //     nome: value.nome,
-    //     usuario: value.usuario,
-    //     email: value.email,
-    //     senha: value.senha,
-    //     data: format(dateTime.setDate(dateTime.getDate()+1), 'yyyy-MM-dd HH:MM:SS'),
-    //     admin: 0,
-    //     ativo: 1
+    //   if(differenceInDays <= 0){
+    //     this.service.removeToken();
+    //     return false;
+    //   } else {
+    //     return true;
     //   };
-
-    //   await this.http.post('usuarios/insert-user/', registerArray).then((result) => {
-    //     this.controller.toastControllerBottom(result.message);
-    //     if(result.success){
-    //       loader.dismiss();
-    //       this.controller.navigateLogin();
-    //     } else {
-    //       loader.dismiss();
-    //       this.controller.toastControllerBottom(result.message);
-    //     };
-    //   });
     // } else {
-    //   this.controller.toastControllerBottom('Necessário possuir conexão com internet!!');
-    //   loader.dismiss();
+    //   //this.service.setExpireToken('2022-05-17T11:37:44-03:00');
+    //   const differenceInDays = Math.floor((expireDate.getTime() - newDate.getTime()) / (1000 * 3600 * 24));
+    //   const diferenceInHours = currentHours - expireHours;
+
+    //   if(differenceInDays === -1){
+    //     if(diferenceInHours >= validationInHours){
+    //       this.service.removeToken();
+    //       return false;
+    //     } else {
+    //       return true;
+    //     };
+    //   } else {
+    //     this.service.removeToken();
+    //     return false;
+    //   };
     // };
+
+    return true;
   };
 
   async ifLoggedIn() {
@@ -149,9 +100,5 @@ export class AuthService {
       }
     });
   }
-
-  isAuthenticated() {
-    return this.authState.value;
-  }
-}
+};
 

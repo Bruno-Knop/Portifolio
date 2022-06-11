@@ -10,7 +10,7 @@
     height: 200px;
     width: 350px;
     background: var(--ion-color-primary);
-    background: linear-gradient(40deg, rgba(233, 115, 0, 1) 0%, rgba(246, 151, 69, 0.7404003837863271) 100%);
+    background: linear-gradient(40deg, var(--ion-color-primary-linear-gradient) 0%, var(--ion-color-primary-linear-gradient-rgba) 100%);
     box-shadow: 0px 1px 10px rgba(98, 140, 255, 0.5);
     transform: rotate(-15deg);
     border-radius: 10px 10px 10px 50px;
@@ -26,8 +26,9 @@
     display: flex;
     align-items: center;
     .header-img {
+        background-color: var(--ion-color-light);
         border-radius: 50%;
-        border: 7px solid #d8721b;
+        border: 7px solid var(--ion-color-primary-shade);
         margin-right: 15px;
         display: grid;
         width: 110px;
@@ -39,6 +40,9 @@
         img {
             width: 100px;
             height: 100px;
+        }
+        ion-img::part(image) {
+            border-radius: 50%;
         }
         #toggleTheme-icon {
             width: 20px;
@@ -52,11 +56,11 @@
     }
     h2 {
         font-weight: 300;
-        color: #fff;
+        color: var(--ion-color-light);
     }
     p {
         font-size: 12px;
-        color: #fff;
+        color: var(--ion-color-light);
         font-weight: 100;
         letter-spacing: 0.4px;
     }
@@ -66,7 +70,7 @@
     margin: 0px;
     ion-icon {
         margin-right: 20px;
-        color: #d8721b;
+        color: var(--ion-color-primary-shade);
     }
     ion-item {
         padding-left: 15px;
@@ -79,9 +83,9 @@
     }
     .active {
         border-left: 5px solid;
-        color: #d8721b;
+        color: var(--ion-color-primary-shade);
         ion-ico {
-            color: #f5821f;
+            color: var(--ion-color-primary);
         }
     }
 }
@@ -91,7 +95,7 @@
     height: 50px;
     width: 350px;
     background: var(--ion-color-primary);
-    background: linear-gradient(40deg, #e97300 0%, rgba(246, 151, 69, 0.7404003838) 100%);
+    background: linear-gradient(40deg, var(--ion-color-primary-linear-gradient) 0%, var(--ion-color-primary-linear-gradient-rgba) 100%);
     box-shadow: 0px 1px 10px rgb(98 140 255 / 50%);
     border-radius: 80px 80px 10px 10px;
     margin-left: -24px;
@@ -113,5 +117,5 @@
     display: flex;
     position: absolute;
     font-size: 30px;
-    color: #fff;
+    color: var(--ion-color-light);
 }

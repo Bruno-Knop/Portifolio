@@ -4,7 +4,7 @@ import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } fro
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { StorageService } from './../storageService.service';
+import { StorageService } from '../storage.service';
 
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable prefer-const */

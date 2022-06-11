@@ -1,0 +1,128 @@
+<ion-card-content>
+    <ion-grid>
+        <ion-row>
+            <!-- <ion-col class="id-col" size-xs="6" size-sm="6" size-md="6" size-lg="2" size-xl="2" *ngIf="configFiltro.id">
+                <ion-item>
+                    <ion-label position="floating">ID</ion-label>
+
+                    <ion-input [(ngModel)]="body.id"></ion-input>
+                </ion-item>
+            </ion-col>
+            <ion-col class="titulo-col" size-xs="6" size-sm="6" size-md="6" size-lg="3" size-xl="3" *ngIf="configFiltro.titulo">
+                <ion-item>
+                    <ion-label position="floating">Título</ion-label>
+                    <ion-input [(ngModel)]="body.titulo"></ion-input>
+                </ion-item>
+            </ion-col>
+            <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="3" size-xl="3" *ngIf="status.length > 0">
+                <ion-item appSelectAllDirective>
+                    <ion-label position="floating">Status</ion-label>
+                    <ion-select [(ngModel)]="cboStatus" multiple="true" interface="popover">
+                        <ion-select-option *ngFor="let item of status" [value]="item.codigo">{{ item.descricao }}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+            <ion-col size-xs="6" size-sm="6" size-md="6" size-lg="2" size-xl="2" *ngIf="responsavel.length > 0">
+                <ion-item appSelectAllDirective>
+                    <ion-label position="floating">Responsável</ion-label>
+                    <ion-select [(ngModel)]="cboResponsavel" multiple="true" interface="popover">
+                        <ion-select-option *ngFor="let item of responsavel" [value]="item.codigo">{{ item.nome }}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+            <ion-col size-xs="6" size-sm="6" size-md="6" size-lg="2" size-xl="2" *ngIf="revisor.length > 0">
+                <ion-item appSelectAllDirective>
+                    <ion-label position="floating">Revisor</ion-label>
+                    <ion-select [(ngModel)]="cboRevisor" multiple="true" interface="popover">
+                        <ion-select-option *ngFor="let item of revisor" [value]="item.codigo">{{ item.nome }}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+            <ion-col size="12">
+                <ion-accordion-group *ngIf="collapseFiltroAvancado">
+                    <ion-accordion>
+                        <ion-item slot="header">
+                            <ion-label>Filtro Avançado</ion-label>
+                        </ion-item>
+                        <ion-row slot="content">
+                            <ion-col size-xs="12" size-sm="12" size-md="3" size-lg="3" size-xl="3" *ngIf="empresa.length > 0">
+                                <ion-item appSelectAllDirective>
+                                    <ion-label position="floating">Empresa</ion-label>
+                                    <ion-select [(ngModel)]="cboEmpresa" multiple="true" interface="popover">
+                                        <ion-select-option *ngFor="let item of empresa" [value]="item.codigo">{{ item.nome_fantasia }}</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size-xs="12" size-sm="12" size-md="3" size-lg="3" size-xl="3" *ngIf="tipoContato.length > 0">
+                                <ion-item appSelectAllDirective>
+                                    <ion-label position="floating">Tipo Contato</ion-label>
+                                    <ion-select [(ngModel)]="cboTipoContato" multiple="true" interface="popover">
+                                        <ion-select-option value="1">DESKTOP</ion-select-option>
+                                        <ion-select-option value="2">SKYPE</ion-select-option>
+                                        <ion-select-option value="3">WHATSAPP</ion-select-option>
+                                        <ion-select-option value="4">EMAIL</ion-select-option>
+                                        <ion-select-option value="5">TELEFONE</ion-select-option>
+                                        <ion-select-option value="6">VISITA TÉCNICA</ion-select-option>
+                                        <ion-select-option value="7">REUNIÃO</ion-select-option>
+                                        <ion-select-option value="8">PESSOAL</ion-select-option>
+                                        <ion-select-option value="9">TOM TICKET</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col class="solicitante-col" size-xs="12" size-sm="12" size-md="3" size-lg="3" size-xl="3" *ngIf="configFiltro.solicitante">
+                                <ion-item>
+                                    <ion-label position="floating">Solicitante</ion-label>
+                                    <ion-input [(ngModel)]="body.solicitante"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size-xs="12" size-sm="12" size-md="3" size-lg="3" size-xl="3">
+                                <ion-item appSelectAllDirective>
+                                    <ion-label position="floating">Prioridade</ion-label>
+                                    <ion-select [(ngModel)]="cboPrioridade" (ngModelChange)="cboPrioridadeChange(cboPrioridade)" multiple="true" interface="popover">
+                                        <ion-select-option value="1">BAIXA</ion-select-option>
+                                        <ion-select-option value="2">MÉDIA</ion-select-option>
+                                        <ion-select-option value="3">ALTA</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size-xs="12" size-sm="12" size-md="3" size-lg="3" size-xl="3" *ngIf="tipoAtividade.length > 0">
+                                <ion-item appSelectAllDirective>
+                                    <ion-label position="floating">Atividade</ion-label>
+                                    <ion-select [(ngModel)]="cboTipoAtividade" multiple="true" interface="popover">
+                                        <ion-select-option *ngFor="let item of tipoAtividade" [value]="item.codigo">{{ item.descricao }}</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col class="planejamento-col" size-xs="12" size-sm="12" size-md="3" size-lg="3" size-xl="3">
+                                <ion-label class="dataPlanejamento-label" position="floating">Planejamento</ion-label>
+                                <app-date-picker id="Data" [formControlNameModel]="'dataPlanejamento'" [modelDatePicker]="'modal'" [presentation]="'date'" (dataValueChange)="dataChange($event)"></app-date-picker>
+                            </ion-col>
+                            <ion-col size-xs="12" size-sm="12" size-md="3" size-lg="3" size-xl="3" *ngIf="criador.length > 0">
+                                <ion-item appSelectAllDirective>
+                                    <ion-label position="floating">Criador</ion-label>
+                                    <ion-select [(ngModel)]="cboCriador" multiple="true" interface="popover">
+                                        <ion-select-option *ngFor="let item of criador" [value]="item.codigo">{{ item.nome }}</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size-xs="12" size-sm="12" size-md="3" size-lg="3" size-xl="3">
+                                <ion-item appSelectAllDirective>
+                                    <ion-label position="floating">Time</ion-label>
+                                    <ion-select [(ngModel)]="cboTime" (ngModelChange)="cboTimeChange(cboTime)" multiple="true" interface="popover">
+                                        <ion-select-option value="1">Time A</ion-select-option>
+                                        <ion-select-option value="2">Time B</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-accordion>
+                </ion-accordion-group>
+            </ion-col> -->
+            <ion-col size="12">
+                <ion-item lines="none">
+                    <ion-button class="ion-item-end" slot="end" size="medium" (click)="btnFiltrar()">FILTRAR</ion-button>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-card-content>

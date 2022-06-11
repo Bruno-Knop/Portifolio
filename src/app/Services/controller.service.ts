@@ -15,16 +15,16 @@ export class ControllService {
     this.navCtrl.navigateRoot([nav]);
   };
 
-  navigateIntro(){
-    this.navCtrl.navigateRoot(['/Intro']);
-  };
-
   navigateLogin(){
-    this.navCtrl.navigateRoot(['/Login']);
+    this.navCtrl.navigateRoot(['/login']);
   };
 
   navigateHome(){
-    this.navCtrl.navigateRoot(['/Home']);
+    this.navCtrl.navigateRoot(['/main/home']);
+  };
+
+  navigateDashboard() {
+    this.navCtrl.navigateRoot(['/main/dashboard']);
   };
 
   async toastControllerTop(sMsg: string){

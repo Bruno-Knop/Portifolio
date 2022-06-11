@@ -1,13 +1,12 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { StorageService } from './storageService.service';
+import { StorageService } from './storage.service';
 
 @Injectable()
 export class MenuService {
   emmitMenuToggleChange = new EventEmitter<boolean>();
-  emmitDarkModeToggleChange = new EventEmitter<boolean>();
   private menuToggle = true;
 
-  constructor(private service: StorageService) { }
+  constructor() { }
 
   getToggle(): boolean {
     return this.menuToggle;
@@ -16,16 +15,6 @@ export class MenuService {
   setToggle(toggle: boolean): void {
     this.menuToggle = toggle;
     this.emmitMenuToggleChange.emit(toggle);
-  }
-
-  async toggleThemeDark(bool: boolean) {
-    if(bool){
-      this.service.setDarkMode(bool);
-      document.body.setAttribute('color-theme', 'dark');
-    } else {
-      this.service.setDarkMode(bool);
-      document.body.setAttribute('color-theme', 'light');
-    };
-    this.emmitDarkModeToggleChange.emit(bool);
   };
+
 }
