@@ -21,8 +21,121 @@ export class TableComponent implements OnInit {
       limit: 10,
       count: 0,
       totalPages: 0,
-      header: [],
-      rows: []
+      header: [
+        {
+          width: 50,
+          resizeable: false,
+          name: 'Código',
+          prop: 'codigo'
+      },
+      {
+          width: 100,
+          resizeable: false,
+          name: 'Tipo',
+          prop: 'tipoAtividade'
+      },
+      {
+          width: 100,
+          resizeable: false,
+          name: 'Empresa',
+          prop: 'empresa'
+      },
+      {
+          width: 100,
+          resizeable: false,
+          name: 'Prioridade',
+          prop: 'prioridade'
+      },
+      {
+          width: 100,
+          resizeable: false,
+          name: 'Status',
+          prop: 'status'
+      }
+      ],
+      rows: [
+        {
+          codigo: 39,
+          codigoEmpresa: 1,
+          empresa: 'ACTI',
+          numeroDocumento: 39,
+          titulo: 'CRIAR EDITAR',
+          descricao: 'CRIAR EDITAR',
+          dataCriacao: '25/04/2022',
+          codigoDestinacao: 1,
+          destinacao: 'SUPORTE',
+          codigoResponsavel: 2,
+          responsavel: 'Teste1',
+          marcador: 'null',
+          codigoTipoAtividade: 3,
+          tipoAtividade: 'Pessoal',
+          solicitante: 'CRIAR EDITAR',
+          codigoStatus: 6,
+          status: 'CONCLUIDA',
+          codigoPrioridade: 2,
+          prioridade: 'Média',
+          dataPlanejamento: '09/03/2022',
+          duracao: 7,
+          codigoRevisor: 3,
+          revisor: 'Teste3',
+          codigoCriador: 1,
+          criador: 'Teste'
+      },
+      {
+          codigo: 38,
+          codigoEmpresa: 1,
+          empresa: 'ACTI',
+          numeroDocumento: 38,
+          titulo: 'CRIAR EDITAR',
+          descricao: 'CRIAR EDITAR',
+          dataCriacao: '08/03/2022',
+          codigoDestinacao: 1,
+          destinacao: 'SUPORTE',
+          codigoResponsavel: 3,
+          responsavel: 'Teste3',
+          marcador: 'null',
+          codigoTipoAtividade: 3,
+          tipoAtividade: 'Pessoal',
+          solicitante: 'CRIAR EDITAR',
+          codigoStatus: 12,
+          status: 'CANCELADO',
+          codigoPrioridade: 2,
+          prioridade: 'Média',
+          dataPlanejamento: '08/03/2022',
+          duracao: 7,
+          codigoRevisor: 3,
+          revisor: 'Teste3',
+          codigoCriador: 1,
+          criador: 'Teste'
+      },
+      {
+          codigo: 37,
+          codigoEmpresa: 1,
+          empresa: 'ACTI',
+          numeroDocumento: 37,
+          titulo: 'CRIAR EDITAR',
+          descricao: 'CRIAR EDITAR',
+          dataCriacao: '08/03/2022',
+          codigoDestinacao: 1,
+          destinacao: 'SUPORTE',
+          codigoResponsavel: 3,
+          responsavel: 'Teste3',
+          marcador: 'null',
+          codigoTipoAtividade: 3,
+          tipoAtividade: 'Pessoal',
+          solicitante: 'CRIAR EDITAR',
+          codigoStatus: 1,
+          status: 'BACKLOG',
+          codigoPrioridade: 2,
+          prioridade: 'Média',
+          dataPlanejamento: '08/03/2022',
+          duracao: 7,
+          codigoRevisor: 3,
+          revisor: 'Teste3',
+          codigoCriador: 1,
+          criador: 'Teste'
+      },
+      ]
   };
 
   columns: TableColumn[];
@@ -45,7 +158,7 @@ export class TableComponent implements OnInit {
 
     this.tableService.emitPageBody.subscribe((value: TableInfoInterface) => {
       console.log('emitPageData', value);
-      this.page = value;
+      //this.page = value;
     });
 
     this.tableService.setPage(this.namePage, this.page);
